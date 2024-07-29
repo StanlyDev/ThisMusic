@@ -21,7 +21,7 @@
   /*Nav*/
   .logo h1 {
     font-weight: lighter;
-    cursor: pointer;
+    cursor: default;
   }
   
   .navbar {
@@ -178,6 +178,33 @@
       width: 1px;
       height: 1.5em;
       transform: translate(0,-1em) rotate(-180deg) translate(7.5em,-0.25em);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    body {
+      width: 100%;
+      padding: 0 1rem;
+    }
+  
+    .navbar {
+      width: 100%;
+    }
+  
+    .main-container {
+      margin-top: 4rem;
+      padding: 1rem;
+    }
+  
+    form {
+      width: 100%;
+      max-width: none;
+    }
+  
+    .input {
+      width: 50px;
+      height: 50px;
     }
   }
   
