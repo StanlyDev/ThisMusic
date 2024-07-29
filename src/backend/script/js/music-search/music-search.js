@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const input = document.getElementById('search');
-    const ytMusicResultsContainer = document.querySelector('.music-page .yt-music');
-    const spotifyResultsContainer = document.querySelector('.music-page .Spotify');
+    const musicResultsContainer = document.querySelector('.music-page .search-result');
+    const videoResultsContainer = document.querySelector('.video-page .search-result');
     const loadMoreButton = document.createElement('button');
     loadMoreButton.textContent = 'Mostrar más';
     loadMoreButton.style.display = 'none'; // Oculta el botón inicialmente
@@ -13,12 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = input.value.trim(); // Obtiene el valor del input y elimina los espacios en blanco
         if (query) {
             searchYouTubeMusic(query);
-            searchSpotify(query);
         }
     });
 
-    let nextPageToken = ''; // Token para la paginación de YouTube
-    const resultsPerPage = 50; // Número de resultados a mostrar por página
+    let nextPageToken = ''; // Token para la paginación
+    const resultsPerPage = 20; // Número de resultados a mostrar por página
     let allResults = []; // Almacena todos los resultados obtenidos
     let currentIndex = 0; // Índice actual para mostrar los resultados
 
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 nextPageToken = data.nextPageToken || ''; // Actualiza el token para la siguiente página
                 allResults = data.items; // Almacena todos los resultados
                 currentIndex = 0; // Reinicia el índice
-                displayYouTubeResults();
+                displayResults();
                 if (nextPageToken) {
                     loadMoreButton.style.display = 'block'; // Muestra el botón "Mostrar más"
                 } else {
@@ -42,24 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error fetching YouTube data:', error));
     }
 
-    function searchSpotify(query) {
-        const accessToken = 'YOUR_SPOTIFY_ACCESS_TOKEN'; // Reemplaza con tu token de acceso de Spotify
-        const apiURL = `https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=${resultsPerPage}`;
-
-        fetch(apiURL, {
-            headers: {
-                'Authorization': `Bearer ${accessToken}`
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            displaySpotifyResults(data.tracks.items);
-        })
-        .catch(error => console.error('Error fetching Spotify data:', error));
-    }
-
-    function displayYouTubeResults() {
-        ytMusicResultsContainer.innerHTML = ''; // Limpiar resultados anteriores
+    function displayResults() {
+        // Mostrar un número específico de resultados
         for (let i = currentIndex; i < currentIndex + resultsPerPage && i < allResults.length; i++) {
             const item = allResults[i];
             const videoId = item.id.videoId;
@@ -76,38 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="${videoURL}" target="_blank">${title}</a>
             `;
 
-            // Añadir el resultado al contenedor correspondiente
-            ytMusicResultsContainer.appendChild(resultElement);
+            // Añadir el resultado a los contenedores correspondientes
+            musicResultsContainer.appendChild(resultElement);
+            videoResultsContainer.appendChild(resultElement.cloneNode(true)); // Clonar el nodo para evitar que se elimine del DOM original
         }
 
         currentIndex += resultsPerPage; // Actualiza el índice para la siguiente página
         if (currentIndex >= allResults.length) {
             loadMoreButton.style.display = 'none'; // Oculta el botón si no hay más resultados
         }
-    }
-
-    function displaySpotifyResults(results) {
-        spotifyResultsContainer.innerHTML = ''; // Limpiar resultados anteriores
-        results.forEach(item => {
-            const trackName = item.name;
-            const artistName = item.artists.map(artist => artist.name).join(', ');
-            const albumName = item.album.name;
-            const albumArt = item.album.images[0].url;
-            const trackURL = item.external_urls.spotify;
-
-            // Crear un elemento para mostrar el resultado
-            const resultElement = document.createElement('div');
-            resultElement.classList.add('result');
-
-            resultElement.innerHTML = `
-                <img src="${albumArt}" alt="${trackName}">
-                <a href="${trackURL}" target="_blank">${trackName} - ${artistName}</a>
-                <p>${albumName}</p>
-            `;
-
-            // Añadir el resultado al contenedor correspondiente
-            spotifyResultsContainer.appendChild(resultElement);
-        });
     }
 
     function loadMoreResults() {
