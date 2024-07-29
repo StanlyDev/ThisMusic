@@ -218,3 +218,53 @@
     padding: 1rem;
   }
   
+  .search-result {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 1rem;
+    gap: 10px;
+    margin: 0 auto;
+}
+
+.search-result .result {
+    text-align: center;
+    width: 200px;
+}
+
+.search-result .result img {
+    max-width: 100%;
+    height: auto;
+}
+
+.search-result .result a {
+    text-decoration: none;
+    color: #fff;
+    margin: 10px 0;
+    display: block;
+    text-align: center;
+}
+
+.main-content {
+    position: relative; /* Asegura que el botón pueda ser posicionado correctamente */
+}
+
+.pages{
+    margin-left: 3rem;
+}
+
+.main-content button {
+    margin: 20px auto;
+    display: block;
+    padding: 10px 20px;
+    background-color: #255ff4;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main-content button:hover {
+    background-color: #1a4c9b;
+}
