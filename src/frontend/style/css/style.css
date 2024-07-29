@@ -8,6 +8,7 @@
   }
   
   /*Body*/
+
   body {
     width: 700px;
     background-color: #212121;
@@ -231,6 +232,7 @@
 .search-result .result {
     text-align: center;
     width: 200px;
+    margin: 50px;
 }
 
 .search-result .result img {
@@ -247,7 +249,7 @@
 }
 
 .main-content {
-    position: relative; /* Asegura que el botón pueda ser posicionado correctamente */
+    position: relative;
 }
 
 .pages{
