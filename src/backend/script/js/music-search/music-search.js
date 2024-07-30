@@ -63,19 +63,22 @@ document.addEventListener('DOMContentLoaded', function() {
     async function searchYouTubeMusic(query) {
         const apiKey = 'AIzaSyAm-M70z7r4MoBhR3vhUmbz_7EOYeDC5pg';
         const apiURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodeURIComponent(query)}&key=${apiKey}&maxResults=${resultsPerPage}&pageToken=${nextPageTokenYouTube}`;
-
+    
         try {
             const response = await fetch(apiURL);
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
             const data = await response.json();
             nextPageTokenYouTube = data.nextPageToken || '';
-            allResultsYouTube = data.items;
+            allResultsYouTube = data.items || [];
             currentIndexYouTube = 0;
             displayYouTubeResults();
             loadMoreButton.style.display = nextPageTokenYouTube || nextSpotifyURL ? 'block' : 'none';
         } catch (error) {
             console.error('Error fetching YouTube data:', error);
         }
-    }
+    }    
 
     function displayYouTubeResults() {
         for (let i = currentIndexYouTube; i < currentIndexYouTube + resultsPerPage && i < allResultsYouTube.length; i++) {
