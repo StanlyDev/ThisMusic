@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This Music - Explore music and video content with our search functionality.">
     <link rel="stylesheet" href="src/frontend/style/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.lordicon.com/lordicon.js" defer></script>
     <script src="src/backend/script/js/music-search/music-search.js" defer></script>
-    <script src="https://cdn.lordicon.com/lordicon.js"></script>
     <title>This Music</title>
 </head>
 <body>
@@ -17,9 +18,7 @@
             <div class="header-content">
                 <nav class="navbar">
                     <div class="logo">
-                        <h1>
-                            This Music
-                        </h1>
+                        <h1>This Music</h1>
                     </div>
                     <div class="home">
                         <a href="index.html">
@@ -40,7 +39,7 @@
                                 trigger="hover"
                                 stroke="light"
                                 colors="primary:#ffffff,secondary:#ffffff"
-                                style="width:50px;height:50px">
+                                style="width:50px;height:50px;">
                             </lord-icon>
                         </a>
                     </div>
@@ -51,19 +50,18 @@
                                 trigger="hover"
                                 stroke="light"
                                 colors="primary:#ffffff,secondary:#ffffff"
-                                style="width:50px;height:50px">
+                                style="width:50px;height:50px;">
                             </lord-icon>
                         </a>
                     </div>
                     <div class="about">
                         <a href="#about-page">
-                            <script src="https://cdn.lordicon.com/lordicon.js"></script>
                             <lord-icon
                                 src="https://cdn.lordicon.com/gkgkfbzm.json"
                                 trigger="hover"
                                 stroke="light"
                                 colors="primary:#ffffff,secondary:#ffffff"
-                                style="width:50px;height:50px">
+                                style="width:50px;height:50px;">
                             </lord-icon>
                         </a>
                     </div>
@@ -76,7 +74,6 @@
             <div class="main-content">
                 <div class="search-content">
                     <form>
-                        <label for="search">Search</label>
                         <input required="" pattern=".*\S.*" type="search" class="input" id="search">
                         <span class="caret"></span>
                     </form>
@@ -85,17 +82,18 @@
                     <div class="home-page" id="home-page">
                         <!--Espacio vacio-->
                     </div>
-                    <div class="music-page" id="music-page">
-                        <h2>Resultado de música</h2>
-                        <div class="search-result">
-                            <div class="yt-results"></div>
-                            <div class="spt-results"></div>
-                        </div>
-                    </div>                  
-                    <div class="video-page" id="video-page">
-                        <h2>Resultado de video</h2>
-                        <div class="search-result">
-                            <div class="yt"></div>
+                    <div class="result-content">
+                        <div class="music-page" id="music-page">
+                            <h2>Resultado de música</h2>
+                            <div class="search-result">
+                                <div class="spt-results"></div>
+                            </div>
+                        </div><br>
+                        <div class="video-page" id="video-page">
+                            <h2>Resultado de video</h2>
+                            <div class="search-result">
+                                <div class="yt-results"></div>
+                            </div>
                         </div>
                     </div>
                 </div>

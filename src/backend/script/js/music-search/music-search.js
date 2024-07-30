@@ -2,9 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     const input = document.getElementById('search');
     const pages = document.getElementById('pages');
-    const ytMusicResultsContainer = document.querySelector('.yt-results');
     const spotifyResultsContainer = document.querySelector('.spt-results');
-    const videoResultsContainer = document.querySelector('.yt');
+    const videoResultsContainer = document.querySelector('.yt-results');
     const loadMoreButton = createLoadMoreButton();
 
     form.addEventListener('submit', async function(event) {
@@ -87,8 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <a href="${videoURL}" target="_blank">${title}</a>
             `;
 
-            ytMusicResultsContainer.appendChild(resultElement);
-            videoResultsContainer.appendChild(resultElement.cloneNode(true));
+            videoResultsContainer.appendChild(resultElement);
         }
 
         currentIndex += resultsPerPage;
@@ -136,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function clearResults() {
-        ytMusicResultsContainer.innerHTML = '';
         spotifyResultsContainer.innerHTML = '';
         videoResultsContainer.innerHTML = '';
     }

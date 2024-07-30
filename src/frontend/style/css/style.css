@@ -202,9 +202,12 @@ label {
       height: 30px;
   }
 
-  .search-result .result {
-      width: 100%;
-      margin: 20px 0;
+  .search-result {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 1rem;
+      overflow-x:scroll;
   }
 
   .search-result {
@@ -227,33 +230,52 @@ footer {
 /* Contenedor de resultados de búsqueda */
 .search-result {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1rem;
   gap: 20px;
+  overflow-x:scroll;
+  width: 100%;
 }
 
 /* Contenedor de resultados de Spotify */
-.spt-results {
-  flex: 1 1 45%; /* Ajusta el tamaño y el espacio que ocupa en el contenedor */
-  margin-right: 1rem; /* Espacio entre Spotify y YouTube */
+.spt-results, .yt-results {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  margin-right: 1rem;
+  float: left;
+  display: flex;
+  align-items: baseline;
 }
 
-/* Contenedor de resultados de YouTube */
-.yt-results {
-  flex: 1 1 45%; /* Ajusta el tamaño y el espacio que ocupa en el contenedor */
+.result-content {
+  height: 100%;
+  width: auto;
 }
 
 /* Resultados individuales */
 .result {
   text-align: center;
   margin-bottom: 20px;
+  background-color: #333;
+  border-radius: 8px;
+  padding: 10px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  margin: 1rem;
 }
 
-.result img {
-  max-width: 100%;
-  height: auto;
+/* Imágenes dentro de los resultados */
+.spt-results img, .yt-results img {
+  width: 100%;
+  max-height: auto;
+  object-fit: cover;
+  border-radius: 5px;
 }
+
 
 .result a {
   text-decoration: none;
