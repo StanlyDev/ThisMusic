@@ -214,6 +214,28 @@ label {
       flex-direction: column;
       align-items: center;
   }
+
+  table, th, td {
+      display: block;
+      width: 100%;
+      white-space: nowrap;
+      overflow-x: auto;
+  }
+
+  th, td {
+      padding: 10px 5px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+  }
+
+  th {
+    display: none;
+  }
+
+  img {
+      max-width: 70px;
+      border-radius: 5px;
+  }
 }
 
 /* Additional Styles */
@@ -272,7 +294,6 @@ footer {
   object-fit: cover;
   border-radius: 5px;
 }
-
 
 .result a {
   text-decoration: none;
