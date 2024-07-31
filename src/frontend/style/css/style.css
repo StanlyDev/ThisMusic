@@ -235,7 +235,6 @@ footer {
   justify-content: space-between;
   padding: 1rem;
   gap: 20px;
-  overflow-x:scroll;
   width: 100%;
 }
 
@@ -245,8 +244,6 @@ footer {
   width: 200px;
   height: auto;
   margin-right: 1rem;
-  float: left;
-  display: flex;
   align-items: baseline;
 }
 
@@ -292,7 +289,7 @@ footer {
   display: none;
 }
 
-.main-content button {
+button {
   margin: 20px auto;
   display: block;
   padding: 10px 20px;
@@ -303,6 +300,39 @@ footer {
   cursor: pointer;
 }
 
-.main-content button:hover {
+button:hover {
   background-color: #1a4c9b;
+}
+
+/* Estilo para la tabla de resultados de YouTube y Spotify */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+img {
+  max-width: 100px;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#spotify-embed {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }

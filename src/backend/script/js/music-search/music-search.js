@@ -88,15 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const thumbnail = item.snippet.thumbnails.default.url;
             const videoURL = `https://www.youtube.com/watch?v=${videoId}`;
 
-            const resultElement = document.createElement('div');
-            resultElement.classList.add('result');
-            resultElement.innerHTML = `
-                <h3>Youtube</h3>
-                <a href="${videoURL}" target="_blank"><img src="${thumbnail}" alt="${title}"></a>
-                <a href="${videoURL}" target="_blank">${title}</a>
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><a href="${videoURL}" target="_blank"><img src="${thumbnail}" alt="${title}" style="width:100px;"></a></td>
+                <td>${title}</td>
+                <td><a href="${videoURL}" target="_blank">Ver video</a></td>
             `;
 
-            videoResultsContainer.appendChild(resultElement);
+            videoResultsContainer.appendChild(row);
         }
 
         currentIndexYouTube += resultsPerPage;
@@ -108,52 +107,79 @@ document.addEventListener('DOMContentLoaded', function() {
     function displaySpotifyResults() {
         for (let i = currentIndexSpotify; i < currentIndexSpotify + resultsPerPage && i < allResultsSpotify.length; i++) {
             const item = allResultsSpotify[i];
-            const resultElement = document.createElement('div');
-            resultElement.classList.add('result');
-            const albumArt = item.album.images[0].url;
             const title = item.name;
-            const artist = item.artists.map(artist => artist.name).join(', ');
-            const trackURL = item.external_urls.spotify;
+            const artist = item.artists[0].name;
+            const image = item.album.images[0]?.url;
+            const url = item.external_urls.spotify;
+            const uri = item.uri;  // Spotify URI to embed
 
-            resultElement.innerHTML = `
-                <h3>Spotify</h3>
-                <a href="${trackURL}" target="_blank"><img src="${albumArt}" alt="${title}"></a>
-                <a href="${trackURL}" target="_blank">${title} - ${artist}</a>
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><a href="${url}" target="_blank"><img src="${image}" alt="${title}" style="width:100px;"></a></td>
+                <td>${title}</td>
+                <td>${artist}</td>
+                <td><button class="play-button" data-uri="${uri}">Escuchar</button></td>
             `;
 
-            spotifyResultsContainer.appendChild(resultElement);
+            spotifyResultsContainer.appendChild(row);
         }
 
         currentIndexSpotify += resultsPerPage;
         if (currentIndexSpotify >= allResultsSpotify.length) {
             loadMoreButton.style.display = nextPageTokenYouTube ? 'block' : 'none';
         }
-    }
 
-    function loadMoreResults() {
-        if (nextPageTokenYouTube) {
-            searchYouTubeMusic(input.value.trim());
-        }
-        if (nextSpotifyURL) {
-            searchSpotify(input.value.trim());
-        }
-    }
-
-    function createLoadMoreButton() {
-        const button = document.createElement('button');
-        button.textContent = 'Mostrar más';
-        button.className = 'load-more';
-        button.style.display = 'none';
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-            loadMoreResults();
+        // Add event listeners to the play buttons
+        const playButtons = document.querySelectorAll('.play-button');
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const uri = this.getAttribute('data-uri');
+                playSpotifyTrack(uri);
+            });
         });
-        document.querySelector('.main-content').appendChild(button);
-        return button;
+    }
+
+    function playSpotifyTrack(uri) {
+        const existingIframe = document.getElementById('spotify-embed');
+        if (existingIframe) {
+            existingIframe.src = `https://open.spotify.com/embed/track/${uri.split(':').pop()}`;
+        } else {
+            const iframe = document.createElement('iframe');
+            iframe.id = 'spotify-embed';
+            iframe.src = `https://open.spotify.com/embed/track/${uri.split(':').pop()}`;
+            iframe.width = '300';
+            iframe.height = '80';
+            iframe.frameBorder = '0';
+            iframe.allowtransparency = 'true';
+            iframe.allow = 'encrypted-media';
+            document.body.appendChild(iframe);
+        }
     }
 
     function clearResults() {
         spotifyResultsContainer.innerHTML = '';
         videoResultsContainer.innerHTML = '';
+        nextPageTokenYouTube = '';
+        nextSpotifyURL = '';
+        allResultsYouTube = [];
+        allResultsSpotify = [];
+        currentIndexYouTube = 0;
+        currentIndexSpotify = 0;
+    }
+
+    function createLoadMoreButton() {
+        const button = document.createElement('button');
+        button.textContent = 'Mostrar más';
+        button.style.display = 'none';
+        button.addEventListener('click', async function() {
+            if (nextSpotifyURL) {
+                await searchSpotify(input.value.trim());
+            }
+            if (nextPageTokenYouTube) {
+                await searchYouTubeMusic(input.value.trim());
+            }
+        });
+        document.body.appendChild(button);
+        return button;
     }
 });
