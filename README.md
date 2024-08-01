@@ -135,7 +135,7 @@ El archivo JavaScript gestiona:
 - Asegúrate de tener un token de acceso válido. El token se obtiene mediante una solicitud a la API de Spotify.
 
 ### YouTube
-- Reemplaza const apiKey = 'API KEY'; con tu propia clave de API de YouTube para evitar problemas de límite de cuota.
+- Reemplaza ```const apiKey = 'API KEY';``` con tu propia clave de API de YouTube para evitar problemas de límite de cuota.
 
 ## CSS Adicional
 
