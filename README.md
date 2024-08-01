@@ -61,7 +61,7 @@ The JavaScript file handles:
 - Make sure you have a valid access token. The token is obtained via a Spotify API request.
 
 ### YouTube
-- Replace `AIzaSyD-a_4Q9ShBeTaNtX_GSZIzslHcj7YAi1Q` with your own YouTube API key to avoid quota limit issues.
+- Replace const apiKey = 'API KEY'; with your own YouTube API key to avoid quota limit issues.
 
 ## Additional CSS
 
@@ -135,7 +135,7 @@ El archivo JavaScript gestiona:
 - Asegúrate de tener un token de acceso válido. El token se obtiene mediante una solicitud a la API de Spotify.
 
 ### YouTube
-- Reemplaza `AIzaSyD-a_4Q9ShBeTaNtX_GSZIzslHcj7YAi1Q` con tu propia clave de API de YouTube para evitar problemas de límite de cuota.
+- Reemplaza const apiKey = 'API KEY'; con tu propia clave de API de YouTube para evitar problemas de límite de cuota.
 
 ## CSS Adicional
 
