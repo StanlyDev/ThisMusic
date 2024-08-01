@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const displaybtn = document.getElementById('displaycontent');
-    const resultcontent = document.querySelector('.result-content');
+    const resultcontent = document.querySelector('.principal-content');
     const aboutpage = document.querySelector('.about-page');
 
     displaybtn.addEventListener('click', function() {

@@ -362,6 +362,7 @@ a:hover {
 
 .about-page {
   display: none;
+  margin-top: 5rem;
 }
 
 .body-container{
@@ -418,7 +419,6 @@ a {
   border: none;
   cursor: pointer;
   transition: 400ms;
-  margin-top: -.5rem;
 }
 
 .button .text {
