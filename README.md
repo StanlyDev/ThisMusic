@@ -61,7 +61,7 @@ The JavaScript file handles:
 - Make sure you have a valid access token. The token is obtained via a Spotify API request.
 
 ### YouTube
-- Replace ```const apiKey = 'YOUR API KEY';``` with your own YouTube API key to avoid quota limit issues.
+- Replace ```bash const apiKey = 'YOUR API KEY';``` with your own YouTube API key to avoid quota limit issues.
 
 ## Additional CSS
 
