@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function getSpotifyToken() {
         try {
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Solo para desarrollo
             const response = await fetch('https://accounts.spotify.com/api/token', {
                 method: 'POST',
                 headers: {
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } catch (error) {
             console.error('Error fetching Spotify token:', error);
         }
-    }
+    }    
 
     async function searchSpotify(query) {
         const token = await getSpotifyToken();
