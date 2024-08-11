@@ -37,15 +37,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     async function getSpotifyToken() {
         try {
-            const response = await fetch('/src/backend/script/api/spotify-token.js', {
-                method: 'POST'
+            const response = await fetch('https://accounts.spotify.com/api/token', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Basic ${btoa('8b6fe43adf434898aadfa61415c23ebe:e338596c25d94b02abe305388455ec1f')}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'grant_type=client_credentials'
             });
             const data = await response.json();
             return data.access_token;
         } catch (error) {
             console.error('Error fetching Spotify token:', error);
         }
-    }     
+    }
 
     async function searchSpotify(query) {
         const token = await getSpotifyToken();
